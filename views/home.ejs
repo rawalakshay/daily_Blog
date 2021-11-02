@@ -1,0 +1,25 @@
+<%- include('partials/header.ejs'); -%>
+
+    <h1>Home</h1>
+    <p> <%= homeContentEJS %> </p>
+
+    <% postsFoundEJS.forEach(function(post){ %>
+        <h1> <%= post.postTitle %> </h1>
+
+        <% function truncateString(str, num) { %>
+           <% if(str.length < num) { %>
+               <% return str %>
+            <% } %>
+        <% var trunStr = str.slice(0, num) + " " + "..."; %>
+        <% return trunStr %>
+        <% } %>
+
+        <p> 
+            <%= truncateString(post.postBody, 100) %>  
+            <a href="/posts/<%= post._id%>">Read more</a> 
+        </p>
+        
+    <%})%>
+
+
+<%- include('partials/footer.ejs'); -%>
