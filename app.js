@@ -89,6 +89,6 @@ app.get("/contact", function (req, res) {
   res.render("contact.ejs", { contactContentEJS: contactContent }); //rednering conatct.ejs
 });
 
-app.listen(process.end.PORT || 3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log("Server started on port 3000"); //opening server at port 3000
 });
