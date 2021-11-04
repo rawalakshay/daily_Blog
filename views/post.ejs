@@ -1,6 +1,19 @@
 <%- include('partials/header.ejs'); -%>
 
-    <h1> <%= postTitleEJS %> </h1>
-    <p> <%= postBodyEJS %> </p>
+<div>
+  <form action="/delete" method="post">
+    <button
+      class="btn btn-danger btn-lg"
+      value="<%=postID%>"
+      onChange="this.form.submit()"
+      name="Delete"
+    />
+    Delete
+  </button>
+  <% console.log("console log ID : " + postID) %>
+  </form>
+  <h1><%= postTitleEJS %></h1>
+  <p><%= postBodyEJS %></p>
+</div>
 
 <%- include('partials/footer.ejs'); -%>

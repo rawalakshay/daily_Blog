@@ -15,6 +15,10 @@
   color: #1abc9c !important;
 }
 
+.brand, .brand:hover, .brand:visited, .brand:active{
+  text-decoration: none;
+}
+
 .footer-padding {
   padding-bottom: 60px;
 }
@@ -32,4 +36,15 @@
   margin-top: 25px;
   font-size: 12px;
   color: #fff;
+}
+
+.btn-warning{
+  background-color: #1abc9c;
+  border: #1abc9c;
+  border-radius: 20px;
+}
+
+.btn-danger{
+  border-radius: 20px;
+  margin-top: 20px;
 }
