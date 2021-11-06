@@ -15,10 +15,10 @@ const aboutContent = //content for about.ejs
   "This is a Daily journal Web App. You can compose and delete posts and give them a simple title.";
 const contactContent = //content for contact.ejs
   "Email: rawalakshay508@gmail.com <br> LinkedIn: https://www.linkedin.com/in/akshayrawal/";
- 
+
 const app = express(); //storing express function in a constant
- 
-const postSchema = new mongoose.Schema({ 
+
+const postSchema = new mongoose.Schema({
   postTitle: String,
   postBody: String,
 }); //Schema (layout) for the post
@@ -50,9 +50,40 @@ app.get("/", function (req, res) {
   });
 });
 
-app.get("/compose", function (req, res) {
-  res.render("compose.ejs"); //rendering "compose.ejs" when URL "/compose"
-});
+app
+  .route("/compose")
+  .get(function (req, res) { //compose GET
+    res.render("compose.ejs"); //rendering "compose.ejs" when URL "/compose"
+  })
+  .post(function (req, res) { //compose POST
+    //after publishing info on "/compose"
+    var post = new Post({
+      postTitle: req.body.postTitle,
+      postBody: req.body.postTextArea,
+    }); //storing info in Schema format
+
+    post.save(); //pushing info to the connected datbase
+    console.log("Post Added to DB");
+
+    res.redirect("/"); //redirecting user to the root directory
+  });
+
+// app.get("/compose", function (req, res) {
+//   res.render("compose.ejs"); //rendering "compose.ejs" when URL "/compose"
+// });
+
+// app.post("/compose", function (req, res) {
+//   //after publishing info on "/compose"
+//   var post = new Post({
+//     postTitle: req.body.postTitle,
+//     postBody: req.body.postTextArea,
+//   }); //storing info in Schema format
+
+//   post.save(); //pushing info to the connected datbase
+//   console.log("Post Added to DB");
+
+//   res.redirect("/"); //redirecting user to the root directory
+// });
 
 app.get("/posts/:postID", function (req, res) {
   //onlick "Read More", searching for _id and storing its value in :post ID
@@ -67,19 +98,6 @@ app.get("/posts/:postID", function (req, res) {
       postID: req.params.postID, //postBodyEJS var for "post.ejs" file
     });
   });
-});
-
-app.post("/compose", function (req, res) {
-  //after publishing info on "/compose"
-  var post = new Post({
-    postTitle: req.body.postTitle,
-    postBody: req.body.postTextArea,
-  }); //storing info in Schema format
-
-  post.save(); //pushing info to the connected datbase
-  console.log("Post Added to DB");
-
-  res.redirect("/"); //redirecting user to the root directory
 });
 
 app.post("/delete", function (req, res) {
@@ -97,11 +115,11 @@ app.post("/delete", function (req, res) {
 });
 
 app.get("/about", function (req, res) {
-  res.render("about.ejs", { aboutContentEJS: aboutContent }); //rednering about.ejs
+  res.render("about.ejs", { aboutContentEJS: aboutContent }); //rendering about.ejs
 });
 
 app.get("/contact", function (req, res) {
-  res.render("contact.ejs", { contactContentEJS: contactContent }); //rednering conatct.ejs
+  res.render("contact.ejs", { contactContentEJS: contactContent }); //rendering contact.ejs
 });
 
 app.listen(process.env.PORT || 3000, function () {
