@@ -68,22 +68,6 @@ app
     res.redirect("/"); //redirecting user to the root directory
   });
 
-// app.get("/compose", function (req, res) {
-//   res.render("compose.ejs"); //rendering "compose.ejs" when URL "/compose"
-// });
-
-// app.post("/compose", function (req, res) {
-//   //after publishing info on "/compose"
-//   var post = new Post({
-//     postTitle: req.body.postTitle,
-//     postBody: req.body.postTextArea,
-//   }); //storing info in Schema format
-
-//   post.save(); //pushing info to the connected datbase
-//   console.log("Post Added to DB");
-
-//   res.redirect("/"); //redirecting user to the root directory
-// });
 
 app.get("/posts/:postID", function (req, res) {
   //onlick "Read More", searching for _id and storing its value in :post ID
